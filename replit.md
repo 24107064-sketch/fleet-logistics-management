@@ -1,45 +1,47 @@
-# [Project name]
+# Fleet & Logistics
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A frontend-only fleet and logistics operations demo for managing vehicles, drivers, shipments, routes, reports, and activity.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/fleet-logistics run dev` — run the frontend
+- `pnpm --filter @workspace/fleet-logistics run typecheck` — typecheck the frontend
+- `pnpm run typecheck` — typecheck all workspace packages
+
+This phase is static and does not use the separately scaffolded API server or database. Operational changes are in-memory and reset on refresh; display preferences use local storage.
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- pnpm workspace, React, Vite, TypeScript-compatible TSX
+- Routing: Wouter
+- Charts: Recharts
+- Icons: Lucide React
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/fleet-logistics/src/pages/` — application pages
+- `artifacts/fleet-logistics/src/data.ts` — centralized fictional seed data and domain types
+- `artifacts/fleet-logistics/src/store.tsx` — client-side state and mock operations
+- `artifacts/fleet-logistics/src/components/Shell.tsx` — shared navigation and global controls
+- `artifacts/fleet-logistics/src/index.css` — shared visual system and responsive rules
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- This initial phase is intentionally frontend-only; do not add server persistence or live operational integrations unless the user requests the backend phase.
+- The mock service operations in the frontend store are the intended boundary for a future REST adapter.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+The demo supports fleet and driver management, shipment tracking, route planning, operational analytics, activity history, global search, notifications, and local preferences. It uses fictional sample records, not live GPS or real operational data.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep the current phase frontend-only; Node.js + Express + SQLite and DevOps automation are future work, not part of this app's initial implementation.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Operational CRUD changes reset when the browser is refreshed; the static demo does not call the workspace API server.
 
 ## Pointers
 
-- See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details
+- See `artifacts/fleet-logistics/README.md` for run instructions, implemented features, limitations, and the future API replacement boundary.

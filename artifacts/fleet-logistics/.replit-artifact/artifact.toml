@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Fleet & Logistics"
+description = "A frontend-only fleet and logistics operations console for monitoring vehicles, drivers, shipments, routes, and operational performance with realistic demo data and interactive management tools."
+version = "1.0.0"
+id = "artifacts/fleet-logistics"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26093
+
+[services.development]
+run = "pnpm --filter @workspace/fleet-logistics run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fleet-logistics", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/fleet-logistics/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26093"
+BASE_PATH = "/"
